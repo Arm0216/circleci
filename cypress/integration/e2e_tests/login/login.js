@@ -12,8 +12,5 @@ When(/I enter password "([^"]*)"$/, function (pass){
 Then(/I click "Log in" button$/, function (){
     Login.clickOnLoginButton()
 })
-Then(/I see my profile Name "Arman Poghosyan"$/, function (){
-    Login.checkLogin()
-})
 
 

@@ -11,11 +11,6 @@ class Login{
     static clickOnLoginButton(){
         cy.get('button[class="sign-in-form__submit-button"]', {timeout: 30000}).contains("Sign in").should('be.visible').click()
     }
-    static checkLogin(){
-        cy.get('div[class="profile-rail-card__actor-link t-16 t-black t-bold"]').should("be.visible").then((text =>{
-            expect(text).to.be.ok
-        }))
-    }
 
 }
 
