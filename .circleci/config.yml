@@ -4,9 +4,6 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/install:
-          build: npm run build
       - cypress/run:
-          executor: cypress/base-10
-          requires:
-            - cypress/install
+          executor: with-chrome
+          browser: chrome
