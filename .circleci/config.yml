@@ -7,6 +7,6 @@ workflows:
       - cypress/install:
           build: npm run build
       - cypress/run:
-          executor: cypress/base-6
+          executor: cypress/base-10
           requires:
             - cypress/install
