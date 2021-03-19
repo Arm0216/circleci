@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "if which grunt ; then grunt dist ; else echo 'no grunt' ; fi"
   },
   "keywords": [],
   "author": "",
