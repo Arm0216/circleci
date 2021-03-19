@@ -1,21 +1,62 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+name: 'Cypress E2E Testing'
 
 trigger:
-- master
+  - master
+  - dev
 
-pool:
-  vmImage: ubuntu-latest
+schedules:
+  - cron: "0 6 * * *"
+    displayName: Each morning at 6am
+    branches:
+      include:
+        - dev
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+variables:
+  - ${{ if eq(variables['build.SourceBranchName'], 'master') }}:
+      - group: vargroup-master
+  - ${{ if ne(variables['build.SourceBranchName'], 'master') }}:
+      - group: vargroup-dev
+  - name: npm_config_cache
+    value: $(Pipeline.Workspace)/.npm
+  - name: CYPRESS_CACHE_FOLDER # Overrides the default cache location
+    value: $(Pipeline.Workspace)/.cache/Cypress
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+stages:
+  - stage: e2e_testing_stage_chrome
+    displayName: 'Chrome E2E Testing'
+    jobs:
+      - job: e2e_testing_job_chrome
+        displayName: 'Run E2E in Chrome'
+        pool:
+          vmImage: macos-latest
+        steps:
+          - template: devops/e2e.testing.yml
+            parameters:
+              browserType: chrome
+
+  - stage: e2e_testing_stage_firefox
+    displayName: 'Firefox E2E Testing'
+    dependsOn: []
+    jobs:
+      - job: e2e_testing_job_firefox
+        displayName: 'Run E2E in Firefox'
+        pool:
+          vmImage: macos-latest
+        steps:
+          - template: devops/e2e.testing.yml
+            parameters:
+              browserType: firefox
+
+  - stage: e2e_testing_stage_edge
+    displayName: 'Edge E2E Testing'
+    dependsOn: []
+    jobs:
+      - job: e2e_testing_job_edge
+        displayName: 'Run E2E in Edge'
+        pool:
+          vmImage: macos-latest
+        steps:
+          - template: devops/e2e.testing.yml
+            parameters:
+              browserType: edge
+
