@@ -51,12 +51,5 @@ stages:
     displayName: 'Edge E2E Testing'
     dependsOn: []
     jobs:
-      - job: e2e_testing_job_edge
-        displayName: 'Run E2E in Edge'
-        pool:
-          vmImage: macos-latest
-        steps:
-          - template: devops/e2e.testing.yml
-            parameters:
-              browserType: edge
+      - script: npx test
 
