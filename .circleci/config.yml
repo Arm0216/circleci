@@ -4,8 +4,9 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/install
+      - cypress/install:
+          build: npm run build
       - cypress/run:
+          executor: cypress/base-6
           requires:
             - cypress/install
-          executor: cypress/base-6
