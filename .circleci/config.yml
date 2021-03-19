@@ -1,8 +1,19 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@1.0.0
 workflows:
   build:
     jobs:
       - cypress/run:
-          start: npm run test
+          executor: cypress/base-8
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cypress/run:
+          executor: cypress/base-8
