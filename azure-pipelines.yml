@@ -14,10 +14,10 @@ steps:
   - script: "npm install"
     displayName: "npm Install"
 
-  - script: "npm run cy:verify"
+  - script: "npm run test:verify"
     displayName: "Cypress Verify"
 
-  - script: "npm run cy:run:reporter"
+  - script: "npm run test:run:reporter"
     displayName: "Run Cypress tests"
 
   - task: PublishBuildArtifacts@1
