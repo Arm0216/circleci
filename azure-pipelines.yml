@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 schedules:
-  - cron: "35 12 * * *"
+  - cron: "00 10 * * *"
     displayName: Daily midnight build
     branches:
       include:
