@@ -2,5 +2,9 @@
   "testFiles": "**/*.feature",
   "baseUrl": "https://www.linkedin.com/",
   "defaultCommandTimeout": 40000,
-  "videoUploadOnPasses": false
+  "videoUploadOnPasses": false,
+  "reporterOptions": {
+    "mochaFile": "test/results/e2e-tests-[hash].xml"
+  }
 }
+
