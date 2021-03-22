@@ -30,13 +30,13 @@ steps:
       TERM: xterm
 
   - task: PublishTestResults@2
-     condition: succeededOrFailed()
-     inputs:
-       testRunner: JUnit
-       testResultsFiles: '$(Build.SourcesDirectory)/test/results/*.xml'
+    condition: succeededOrFailed()
+    inputs:
+      testRunner: JUnit
+      testResultsFiles: '$(Build.SourcesDirectory)/test/results/*.xml'
 
   - task: PublishBuildArtifacts@1
-     inputs:
-       PathtoPublish: '$(Build.SourcesDirectory)/build'
-       ArtifactName: 'drop'
-       publishLocation: 'Container'
+    inputs:
+      PathtoPublish: '$(Build.SourcesDirectory)/build'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
