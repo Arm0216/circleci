@@ -16,9 +16,6 @@ steps:
       npm run build
     displayName: 'npm install and build'
 
-  - script: npm run cy:verify
-    displayName: 'Cypress Verify'
-
   - script: |
       npm run start & npm run cy:test
     displayName: 'Run Cypress tests'
